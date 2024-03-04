@@ -14,12 +14,14 @@ Public Class BCALineAnalyzer
 
         Dim line = lines(lineIndex)
 
-        'Console.WriteLine(lineIndex & ". " & line)
+        Console.WriteLine(lineIndex & ". " & line)
 
         If line.StartsWith(periode.ToString("dd/MM") & " " & BCASaldoAwal.TRANS_TYPE) Then
             Return New BCASaldoAwal(line, periode)
         ElseIf line.Contains(BCABiayaAdmin.TRANS_TYPE) Then
             Return New BCABiayaAdmin(line, periode)
+        ElseIf line.Contains(BCATarikanATM.TRANS_TYPE) Then
+            Return New BCATarikanATM(line, periode)
         ElseIf line.Contains(BCATransferEbanking.TRANS_TYPE) Then
             Return RunTransferEbanking(line, lineIndex)
         ElseIf line.Contains(BCABIFast.TRANS_TYPE) Then

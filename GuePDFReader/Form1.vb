@@ -1,18 +1,23 @@
 ﻿Imports System.Globalization
 Imports iText.Kernel.Pdf
 Imports iText.Kernel.Pdf.Canvas.Parser
+Imports iText.Kernel.Pdf.Canvas.Parser.Listener
 
 Public Class Form1
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
-        Dim pdfDoc As PdfDocument
-        Dim str As String
+
+
 
         OpenFileDialog1.Filter = "File PDF|*.pdf"
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
 
-            pdfDoc = New PdfDocument(New PdfReader(OpenFileDialog1.FileName))
-            str = PdfTextExtractor.GetTextFromPage(pdfDoc.GetPage(1))
+            'Dim pdfDoc = New PdfDocument(New PdfReader(OpenFileDialog1.FileName))
+
+            'Dim text = PdfTextExtractor.GetTextFromPage(pdfDoc.GetPage(9))
+            'Console.WriteLine(text)
+
+            'Return
 
             Dim parser = New GuePdfParser(OpenFileDialog1.FileName)
 

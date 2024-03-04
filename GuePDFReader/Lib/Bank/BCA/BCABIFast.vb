@@ -1,5 +1,4 @@
-﻿Imports System.Diagnostics.Eventing.Reader
-
+﻿
 Public Class BCABIFast
     Inherits BCATrans
 

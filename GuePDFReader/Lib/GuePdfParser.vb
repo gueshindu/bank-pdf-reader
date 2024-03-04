@@ -24,6 +24,9 @@ Public Class GuePdfParser
             textToParse = ""
             For i As Integer = 1 To numPage
                 textToParse &= PdfTextExtractor.GetTextFromPage(pdfDoc.GetPage(i)) & vbCrLf
+
+                'Debug
+                'Console.WriteLine(textToParse)
             Next
             Return textToParse.Length > 10
         Else

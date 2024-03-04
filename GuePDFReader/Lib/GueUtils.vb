@@ -43,4 +43,11 @@ Public Class GueUtils
         Return Double.Parse(strDouble, format)
     End Function
 
+    Public Shared Function IsRupiah(line As String) As Boolean
+        If (line.Contains(".") And line.Contains(",")) Then
+            Return True
+        End If
+        Return False
+    End Function
+
 End Class
