@@ -10,20 +10,24 @@
     End Sub
 
     Private Sub BuildKROtomatis()
+        'CONTOH: 
+        '         10/01 KR OTOMATIS BCA23011023006 120,000.0
+        '         11/01 KR OTOMATIS MID : 885001147175 0998 397,200.00
+
         bankTrans.TransType = TRANS_TYPE
         bankTrans.DBCR = "CR"
 
         If (splitLine(3).StartsWith("BCA")) Then
             bankTrans.Reference = splitLine(3)
             bankTrans.Mutasi = GueUtils.ParseDouble(splitLine(4))
-        ElseIf (splitLine(3).StartsWith("MID :")) Then
+        ElseIf (splitLine(3).StartsWith("MID")) Then
             bankTrans.Reference = splitLine(3) & " " &
                                   splitLine(4) & " " &
                                   splitLine(5) & " " &
                                   splitLine(6)
             bankTrans.Mutasi = GueUtils.ParseDouble(splitLine(7))
         End If
-
+        bankTrans.IsValid = True
     End Sub
 
     Public Overrides Function NextLine(line As String) As Boolean

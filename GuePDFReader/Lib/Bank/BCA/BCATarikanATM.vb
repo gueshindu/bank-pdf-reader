@@ -14,7 +14,6 @@
             mutasi = mutasi.Substring(5) ' ==> 2,500,000.00
 
             bankTrans.Mutasi = GueUtils.ParseDouble(mutasi)
-            bankTrans.Keterangan = TRANS_TYPE & " " & splitLine(lastLineIndex - 2)
         End If
 
     End Sub

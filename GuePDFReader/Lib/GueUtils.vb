@@ -44,8 +44,10 @@ Public Class GueUtils
     End Function
 
     Public Shared Function IsRupiah(line As String) As Boolean
-        If (line.Contains(".") And line.Contains(",")) Then
-            Return True
+        If IsNumeric(line) Then
+            If (line.Contains(".") And line.Contains(",")) Then
+                Return True
+            End If
         End If
         Return False
     End Function

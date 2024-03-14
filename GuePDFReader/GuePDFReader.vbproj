@@ -167,8 +167,11 @@
     <Compile Include="Lib\Bank\BankTrans.vb" />
     <Compile Include="Lib\Bank\BCA\BCABiayaAdmin.vb" />
     <Compile Include="Lib\Bank\BCA\BCABIFast.vb" />
+    <Compile Include="Lib\Bank\BCA\BCABunga.vb" />
+    <Compile Include="Lib\Bank\BCA\BCAKoreksiBunga.vb" />
     <Compile Include="Lib\Bank\BCA\BCAKROtomatis.vb" />
     <Compile Include="Lib\Bank\BCA\BCALineAnalyzer.vb" />
+    <Compile Include="Lib\Bank\BCA\BCAPajakBunga.vb" />
     <Compile Include="Lib\Bank\BCA\BCASetoranTunai.vb" />
     <Compile Include="Lib\Bank\BCA\BCASwitching.vb" />
     <Compile Include="Lib\Bank\BCA\BCASaldoAwal.vb" />
