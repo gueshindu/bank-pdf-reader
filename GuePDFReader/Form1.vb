@@ -10,13 +10,6 @@ Public Class Form1
         OpenFileDialog1.Filter = "File PDF|*.pdf"
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
 
-            'Dim pdfDoc = New PdfDocument(New PdfReader(OpenFileDialog1.FileName))
-
-            'Dim text = PdfTextExtractor.GetTextFromPage(pdfDoc.GetPage(9))
-            'Console.WriteLine(text)
-
-            'Return
-
             Dim parser = New GuePdfParser(OpenFileDialog1.FileName)
 
             parser.SetBank(New BankBCA())

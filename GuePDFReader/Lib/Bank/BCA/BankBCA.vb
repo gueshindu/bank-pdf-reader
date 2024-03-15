@@ -52,6 +52,8 @@ Public Class BankBCA
         End If
         Dim tmp As String
 
+        bankInfo.NamaBank = "BANK BCA"
+
         For i As Integer = 0 To 25
             tmp = linesPDFText(i).Trim
             If (tmp.StartsWith("REKENING")) Then

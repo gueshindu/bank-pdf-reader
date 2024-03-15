@@ -162,6 +162,12 @@
       <DependentUpon>Form1.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="GueBankPDFReader.Designer.vb">
+      <DependentUpon>GueBankPDFReader.vb</DependentUpon>
+    </Compile>
+    <Compile Include="GueBankPDFReader.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Lib\Bank\BCA\BankBCA.vb" />
     <Compile Include="Lib\Bank\BankInfo.vb" />
     <Compile Include="Lib\Bank\BankTrans.vb" />
@@ -185,6 +191,7 @@
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -200,6 +207,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GueBankPDFReader.resx">
+      <DependentUpon>GueBankPDFReader.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

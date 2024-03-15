@@ -1,5 +1,6 @@
 ﻿Public Class BankInfo
 
+    Property NamaBank As String
     Property TipeRekening As String
     Property NomorRekening As String
     Property NamaRekening As String
@@ -11,14 +12,15 @@
     Property DB As Double
 
     Public Overrides Function ToString() As String
-        Return "Tipe rekening: " & TipeRekening & vbCrLf &
+        Return NamaBank & vbCrLf &
+               "Tipe rekening: " & TipeRekening & vbCrLf &
                "Nomor rekening: " & NomorRekening & vbCrLf &
                "Nama rekening: " & NamaRekening & vbCrLf &
                "Mata uang: " & MataUang & vbCrLf &
-               "Saldo awal: " & SaldoAwal & vbCrLf &
-               "Debet: " & DB & vbCrLf &
-               "Kredit: " & CR & vbCrLf &
-               "Saldo akhir: " & SaldoAkhir
+               "Saldo awal: " & SaldoAwal.ToString("#,###.##") & vbCrLf &
+               "Debet: " & DB.ToString("#,###.##") & vbCrLf &
+               "Kredit: " & CR.ToString("#,###.##") & vbCrLf &
+               "Saldo akhir: " & SaldoAkhir.ToString("#,###.##")
 
     End Function
 
