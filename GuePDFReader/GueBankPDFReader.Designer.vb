@@ -34,16 +34,16 @@ Partial Class GueBankPDFReader
         Me.lblInfoBank = New System.Windows.Forms.Label()
         Me.lstData = New System.Windows.Forms.ListView()
         Me.colTgl = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.colType = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.colNama = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.colKet = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.colMutasi = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.colType = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.colDK = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.colMutasi = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.pnlTop = New System.Windows.Forms.Panel()
         Me.pnlCmd = New System.Windows.Forms.Panel()
+        Me.lblDataCopied = New System.Windows.Forms.Label()
         Me.pnlInfo = New System.Windows.Forms.Panel()
         Me.pnlBottom = New System.Windows.Forms.Panel()
-        Me.lblDataCopied = New System.Windows.Forms.Label()
         Me.pnlTop.SuspendLayout()
         Me.pnlCmd.SuspendLayout()
         Me.pnlInfo.SuspendLayout()
@@ -144,6 +144,11 @@ Partial Class GueBankPDFReader
         Me.colTgl.Text = "Tanggal"
         Me.colTgl.Width = 100
         '
+        'colType
+        '
+        Me.colType.Text = "Transaksi"
+        Me.colType.Width = 150
+        '
         'colNama
         '
         Me.colNama.Text = "Nama"
@@ -154,20 +159,15 @@ Partial Class GueBankPDFReader
         Me.colKet.Text = "Keterangan"
         Me.colKet.Width = 200
         '
+        'colDK
+        '
+        Me.colDK.Text = "D/K"
+        '
         'colMutasi
         '
         Me.colMutasi.Text = "Mutasi"
         Me.colMutasi.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.colMutasi.Width = 120
-        '
-        'colType
-        '
-        Me.colType.Text = "Transaksi"
-        Me.colType.Width = 150
-        '
-        'colDK
-        '
-        Me.colDK.Text = "D/K"
         '
         'pnlTop
         '
@@ -192,6 +192,17 @@ Partial Class GueBankPDFReader
         Me.pnlCmd.Size = New System.Drawing.Size(861, 36)
         Me.pnlCmd.TabIndex = 10
         '
+        'lblDataCopied
+        '
+        Me.lblDataCopied.AutoSize = True
+        Me.lblDataCopied.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDataCopied.ForeColor = System.Drawing.Color.MediumBlue
+        Me.lblDataCopied.Location = New System.Drawing.Point(191, 11)
+        Me.lblDataCopied.Name = "lblDataCopied"
+        Me.lblDataCopied.Size = New System.Drawing.Size(473, 15)
+        Me.lblDataCopied.TabIndex = 6
+        Me.lblDataCopied.Text = "Data transaksi sudah dicopy. Silahkan paste pada file Excel yang kosong"
+        '
         'pnlInfo
         '
         Me.pnlInfo.BackColor = System.Drawing.Color.White
@@ -212,17 +223,6 @@ Partial Class GueBankPDFReader
         Me.pnlBottom.Name = "pnlBottom"
         Me.pnlBottom.Size = New System.Drawing.Size(861, 28)
         Me.pnlBottom.TabIndex = 12
-        '
-        'lblDataCopied
-        '
-        Me.lblDataCopied.AutoSize = True
-        Me.lblDataCopied.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDataCopied.ForeColor = System.Drawing.Color.MediumBlue
-        Me.lblDataCopied.Location = New System.Drawing.Point(191, 11)
-        Me.lblDataCopied.Name = "lblDataCopied"
-        Me.lblDataCopied.Size = New System.Drawing.Size(473, 15)
-        Me.lblDataCopied.TabIndex = 6
-        Me.lblDataCopied.Text = "Data transaksi sudah dicopy. Silahkan paste pada file Excel yang kosong"
         '
         'GueBankPDFReader
         '
