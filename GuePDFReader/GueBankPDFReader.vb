@@ -6,26 +6,34 @@
 
         ' Add any initialization after the InitializeComponent() call.
         InitForm()
+
+        lblVersion.Text = "Versi: " & My.Application.Info.Version.ToString
+
     End Sub
 
     Private Sub InitForm()
         btnProcess.Enabled = False
+        btnCopy.Enabled = False
         btnOpen.Enabled = True
         lblFileName.Text = "-"
-        lblDataCopied.Visible = False
+        lblCopyToExcel.Visible = False
+        lblStatus.Text = "Ready"
     End Sub
 
     Private Sub ReadyToProcess()
         btnOpen.Enabled = False
+        btnCopy.Enabled = False
         btnProcess.Enabled = True
-        lblDataCopied.Visible = False
+        lblCopyToExcel.Visible = False
+        lblStatus.Text = "Ready to process"
     End Sub
 
     Private Sub ProcessDone()
-        lblDataCopied.Visible = True
+        lblCopyToExcel.Visible = True
         Clipboard.SetText(stringToClipBoard)
         btnProcess.Enabled = False
         btnOpen.Enabled = True
+        btnCopy.Enabled = True
     End Sub
     Private Sub OpenFile_Click(sender As Object, e As EventArgs) Handles btnOpen.Click
         dlgOpenFile.Filter = "File PDF|*.pdf"
@@ -66,8 +74,17 @@
 
     Private Sub IsiGrid()
         lstData.Items.Clear()
-        stringToClipBoard = "Tanggal" & vbTab & "Nama" & vbTab & "Keterangan" & vbTab & "Tipe" & vbTab & "Debit" & vbTab & "Kredit" & vbCrLf
+        stringToClipBoard = ""
         For i As Integer = 0 To listBankTrans.Count - 1
+
+            If (stringToClipBoard = "") Then
+                stringToClipBoard = listBankTrans(i).ToFormatedTextHeader(
+                    showNama:=chkNama.Checked,
+                    showKeterangan:=chkKet.Checked,
+                    showTipe:=chkTipe.Checked
+                ) & vbCrLf
+            End If
+
             lstData.Items.Add(
                 New ListViewItem({
                                  listBankTrans(i).TransDate.ToString("dd-MMM-yyyy"),
@@ -79,7 +96,19 @@
                                  })
                 )
 
-            stringToClipBoard &= listBankTrans(i).ToFormatedText & vbCrLf
+            stringToClipBoard &= listBankTrans(i).ToFormatedText(
+                showNama:=chkNama.Checked,
+                showKeterangan:=chkKet.Checked,
+                showTipe:=chkTipe.Checked
+            ) & vbCrLf
         Next
+
+        lblStatus.Text = "Data sudah tercopy. Silahkan paste di file excel"
+    End Sub
+
+
+    Private Sub btnCopy_Click(sender As Object, e As EventArgs) Handles btnCopy.Click
+        IsiGrid()
+        Clipboard.SetText(stringToClipBoard)
     End Sub
 End Class

@@ -41,12 +41,22 @@ Partial Class GueBankPDFReader
         Me.colMutasi = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.pnlTop = New System.Windows.Forms.Panel()
         Me.pnlCmd = New System.Windows.Forms.Panel()
-        Me.lblDataCopied = New System.Windows.Forms.Label()
+        Me.lblCopyToExcel = New System.Windows.Forms.Label()
         Me.pnlInfo = New System.Windows.Forms.Panel()
         Me.pnlBottom = New System.Windows.Forms.Panel()
+        Me.lblVersion = New System.Windows.Forms.Label()
+        Me.btnCopy = New System.Windows.Forms.Button()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.chkNama = New System.Windows.Forms.CheckBox()
+        Me.chkKet = New System.Windows.Forms.CheckBox()
+        Me.chkTipe = New System.Windows.Forms.CheckBox()
+        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
+        Me.CheckBox3 = New System.Windows.Forms.CheckBox()
+        Me.lblStatus = New System.Windows.Forms.Label()
         Me.pnlTop.SuspendLayout()
         Me.pnlCmd.SuspendLayout()
         Me.pnlInfo.SuspendLayout()
+        Me.pnlBottom.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblTitle
@@ -183,7 +193,14 @@ Partial Class GueBankPDFReader
         'pnlCmd
         '
         Me.pnlCmd.BackColor = System.Drawing.Color.White
-        Me.pnlCmd.Controls.Add(Me.lblDataCopied)
+        Me.pnlCmd.Controls.Add(Me.CheckBox3)
+        Me.pnlCmd.Controls.Add(Me.CheckBox2)
+        Me.pnlCmd.Controls.Add(Me.chkTipe)
+        Me.pnlCmd.Controls.Add(Me.chkKet)
+        Me.pnlCmd.Controls.Add(Me.chkNama)
+        Me.pnlCmd.Controls.Add(Me.CheckBox1)
+        Me.pnlCmd.Controls.Add(Me.btnCopy)
+        Me.pnlCmd.Controls.Add(Me.lblCopyToExcel)
         Me.pnlCmd.Controls.Add(Me.btnOpen)
         Me.pnlCmd.Controls.Add(Me.btnProcess)
         Me.pnlCmd.Dock = System.Windows.Forms.DockStyle.Top
@@ -192,16 +209,16 @@ Partial Class GueBankPDFReader
         Me.pnlCmd.Size = New System.Drawing.Size(861, 36)
         Me.pnlCmd.TabIndex = 10
         '
-        'lblDataCopied
+        'lblCopyToExcel
         '
-        Me.lblDataCopied.AutoSize = True
-        Me.lblDataCopied.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDataCopied.ForeColor = System.Drawing.Color.MediumBlue
-        Me.lblDataCopied.Location = New System.Drawing.Point(191, 11)
-        Me.lblDataCopied.Name = "lblDataCopied"
-        Me.lblDataCopied.Size = New System.Drawing.Size(473, 15)
-        Me.lblDataCopied.TabIndex = 6
-        Me.lblDataCopied.Text = "Data transaksi sudah dicopy. Silahkan paste pada file Excel yang kosong"
+        Me.lblCopyToExcel.AutoSize = True
+        Me.lblCopyToExcel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCopyToExcel.ForeColor = System.Drawing.Color.MediumBlue
+        Me.lblCopyToExcel.Location = New System.Drawing.Point(322, 9)
+        Me.lblCopyToExcel.Name = "lblCopyToExcel"
+        Me.lblCopyToExcel.Size = New System.Drawing.Size(56, 15)
+        Me.lblCopyToExcel.TabIndex = 6
+        Me.lblCopyToExcel.Text = "Format:"
         '
         'pnlInfo
         '
@@ -218,11 +235,118 @@ Partial Class GueBankPDFReader
         '
         'pnlBottom
         '
+        Me.pnlBottom.Controls.Add(Me.lblStatus)
+        Me.pnlBottom.Controls.Add(Me.lblVersion)
         Me.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.pnlBottom.Location = New System.Drawing.Point(0, 582)
+        Me.pnlBottom.Margin = New System.Windows.Forms.Padding(8)
         Me.pnlBottom.Name = "pnlBottom"
+        Me.pnlBottom.Padding = New System.Windows.Forms.Padding(3)
         Me.pnlBottom.Size = New System.Drawing.Size(861, 28)
         Me.pnlBottom.TabIndex = 12
+        '
+        'lblVersion
+        '
+        Me.lblVersion.AutoSize = True
+        Me.lblVersion.Dock = System.Windows.Forms.DockStyle.Left
+        Me.lblVersion.Location = New System.Drawing.Point(3, 3)
+        Me.lblVersion.Name = "lblVersion"
+        Me.lblVersion.Size = New System.Drawing.Size(26, 13)
+        Me.lblVersion.TabIndex = 0
+        Me.lblVersion.Text = "Ver."
+        '
+        'btnCopy
+        '
+        Me.btnCopy.BackColor = System.Drawing.Color.Aqua
+        Me.btnCopy.Location = New System.Drawing.Point(181, 6)
+        Me.btnCopy.Name = "btnCopy"
+        Me.btnCopy.Size = New System.Drawing.Size(135, 23)
+        Me.btnCopy.TabIndex = 7
+        Me.btnCopy.Text = "Copy data ke Excel"
+        Me.btnCopy.UseVisualStyleBackColor = False
+        '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Checked = True
+        Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CheckBox1.Enabled = False
+        Me.CheckBox1.Location = New System.Drawing.Point(384, 10)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(65, 17)
+        Me.CheckBox1.TabIndex = 8
+        Me.CheckBox1.Text = "Tanggal"
+        Me.CheckBox1.UseVisualStyleBackColor = True
+        '
+        'chkNama
+        '
+        Me.chkNama.AutoSize = True
+        Me.chkNama.Checked = True
+        Me.chkNama.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkNama.Location = New System.Drawing.Point(455, 10)
+        Me.chkNama.Name = "chkNama"
+        Me.chkNama.Size = New System.Drawing.Size(54, 17)
+        Me.chkNama.TabIndex = 9
+        Me.chkNama.Text = "Nama"
+        Me.chkNama.UseVisualStyleBackColor = True
+        '
+        'chkKet
+        '
+        Me.chkKet.AutoSize = True
+        Me.chkKet.Checked = True
+        Me.chkKet.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkKet.Location = New System.Drawing.Point(515, 10)
+        Me.chkKet.Name = "chkKet"
+        Me.chkKet.Size = New System.Drawing.Size(81, 17)
+        Me.chkKet.TabIndex = 10
+        Me.chkKet.Text = "Keterangan"
+        Me.chkKet.UseVisualStyleBackColor = True
+        '
+        'chkTipe
+        '
+        Me.chkTipe.AutoSize = True
+        Me.chkTipe.Location = New System.Drawing.Point(602, 9)
+        Me.chkTipe.Name = "chkTipe"
+        Me.chkTipe.Size = New System.Drawing.Size(47, 17)
+        Me.chkTipe.TabIndex = 11
+        Me.chkTipe.Text = "Tipe"
+        Me.chkTipe.UseVisualStyleBackColor = True
+        '
+        'CheckBox2
+        '
+        Me.CheckBox2.AutoSize = True
+        Me.CheckBox2.Checked = True
+        Me.CheckBox2.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CheckBox2.Enabled = False
+        Me.CheckBox2.Location = New System.Drawing.Point(669, 10)
+        Me.CheckBox2.Name = "CheckBox2"
+        Me.CheckBox2.Size = New System.Drawing.Size(51, 17)
+        Me.CheckBox2.TabIndex = 12
+        Me.CheckBox2.Text = "Debit"
+        Me.CheckBox2.UseVisualStyleBackColor = True
+        '
+        'CheckBox3
+        '
+        Me.CheckBox3.AutoSize = True
+        Me.CheckBox3.Checked = True
+        Me.CheckBox3.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CheckBox3.Enabled = False
+        Me.CheckBox3.Location = New System.Drawing.Point(726, 10)
+        Me.CheckBox3.Name = "CheckBox3"
+        Me.CheckBox3.Size = New System.Drawing.Size(53, 17)
+        Me.CheckBox3.TabIndex = 13
+        Me.CheckBox3.Text = "Kredit"
+        Me.CheckBox3.UseVisualStyleBackColor = True
+        '
+        'lblStatus
+        '
+        Me.lblStatus.AutoSize = True
+        Me.lblStatus.Dock = System.Windows.Forms.DockStyle.Left
+        Me.lblStatus.Location = New System.Drawing.Point(29, 3)
+        Me.lblStatus.Name = "lblStatus"
+        Me.lblStatus.Padding = New System.Windows.Forms.Padding(8, 0, 0, 0)
+        Me.lblStatus.Size = New System.Drawing.Size(8, 13)
+        Me.lblStatus.TabIndex = 1
         '
         'GueBankPDFReader
         '
@@ -243,6 +367,8 @@ Partial Class GueBankPDFReader
         Me.pnlCmd.PerformLayout()
         Me.pnlInfo.ResumeLayout(False)
         Me.pnlInfo.PerformLayout()
+        Me.pnlBottom.ResumeLayout(False)
+        Me.pnlBottom.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -267,5 +393,14 @@ Partial Class GueBankPDFReader
     Friend WithEvents pnlCmd As Panel
     Friend WithEvents pnlInfo As Panel
     Friend WithEvents pnlBottom As Panel
-    Friend WithEvents lblDataCopied As Label
+    Friend WithEvents lblCopyToExcel As Label
+    Friend WithEvents lblVersion As Label
+    Friend WithEvents btnCopy As Button
+    Friend WithEvents chkNama As CheckBox
+    Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents CheckBox3 As CheckBox
+    Friend WithEvents CheckBox2 As CheckBox
+    Friend WithEvents chkTipe As CheckBox
+    Friend WithEvents chkKet As CheckBox
+    Friend WithEvents lblStatus As Label
 End Class

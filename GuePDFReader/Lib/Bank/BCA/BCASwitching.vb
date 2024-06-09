@@ -8,12 +8,35 @@
         BuildSwitching()
     End Sub
 
+    'CONTOH:
+    '01/12 SWITCHING CR DR 002 5,050,000.00
+    'MUNANDIROH
+    ' /New BRI MOB
+
+    '
+    'CONTOH
+
+    '24/01 SWITCHING CR TRANSFER DR 113 255,000.00
+    'SUPRAPTO
+    ' /BANK JATEN
     Private Sub BuildSwitching()
         bankTrans.TransType = TRANS_TYPE
+
+        Dim idx = splitLine.Length
+        Dim value As Double = 0
+
+        While idx > 0
+            If GueUtils.IsRupiah(splitLine(idx - 1)) Then
+                value = GueUtils.ParseDouble(splitLine(idx - 1))
+            End If
+            idx -= 1
+        End While
+        bankTrans.Mutasi = value
+
         bankTrans.Reference = splitLine(3) & " " &
                                   splitLine(4) & " " &
                                   splitLine(5)
-        bankTrans.Mutasi = GueUtils.ParseDouble(splitLine(6))
+
     End Sub
 
     Public Overrides Function NextLine(line As String) As Boolean

@@ -9,6 +9,7 @@
         'Contoh format: 31/01 BIAYA ADM30,000.00 DB 33,969,734.00
         If (splitLine.Length > 2) Then
             bankTrans.TransType = "BIAYA ADMIN"
+            bankTrans.Keterangan = bankTrans.TransType
             Dim tmp = splitLine(2).Replace("ADM", "")
             bankTrans.Mutasi = GueUtils.ParseDouble(tmp)
         End If
