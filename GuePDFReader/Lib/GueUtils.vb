@@ -4,7 +4,7 @@ Public Class GueUtils
     Public Shared Function GetBulanIndonesia(bulan As String) As Integer
         Select Case bulan.ToLower
             Case "januari", "jan" : Return 1
-            Case "fabruari", "feb", "pebruari", "peb" : Return 2
+            Case "februari", "feb", "pebruari", "peb" : Return 2
             Case "maret", "mar" : Return 3
             Case "april", "apr" : Return 4
             Case "mei" : Return 5

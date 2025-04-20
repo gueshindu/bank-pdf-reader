@@ -41,22 +41,25 @@ Partial Class GueBankPDFReader
         Me.colMutasi = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.pnlTop = New System.Windows.Forms.Panel()
         Me.pnlCmd = New System.Windows.Forms.Panel()
+        Me.CheckBox3 = New System.Windows.Forms.CheckBox()
+        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
+        Me.chkTipe = New System.Windows.Forms.CheckBox()
+        Me.chkKet = New System.Windows.Forms.CheckBox()
+        Me.chkNama = New System.Windows.Forms.CheckBox()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.btnCopy = New System.Windows.Forms.Button()
         Me.lblCopyToExcel = New System.Windows.Forms.Label()
         Me.pnlInfo = New System.Windows.Forms.Panel()
         Me.pnlBottom = New System.Windows.Forms.Panel()
-        Me.lblVersion = New System.Windows.Forms.Label()
-        Me.btnCopy = New System.Windows.Forms.Button()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.chkNama = New System.Windows.Forms.CheckBox()
-        Me.chkKet = New System.Windows.Forms.CheckBox()
-        Me.chkTipe = New System.Windows.Forms.CheckBox()
-        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox3 = New System.Windows.Forms.CheckBox()
         Me.lblStatus = New System.Windows.Forms.Label()
+        Me.lblVersion = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.numHalaman = New System.Windows.Forms.NumericUpDown()
         Me.pnlTop.SuspendLayout()
         Me.pnlCmd.SuspendLayout()
         Me.pnlInfo.SuspendLayout()
         Me.pnlBottom.SuspendLayout()
+        CType(Me.numHalaman, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblTitle
@@ -111,7 +114,7 @@ Partial Class GueBankPDFReader
         '
         'btnProcess
         '
-        Me.btnProcess.Location = New System.Drawing.Point(100, 6)
+        Me.btnProcess.Location = New System.Drawing.Point(232, 6)
         Me.btnProcess.Name = "btnProcess"
         Me.btnProcess.Size = New System.Drawing.Size(75, 23)
         Me.btnProcess.TabIndex = 5
@@ -144,7 +147,7 @@ Partial Class GueBankPDFReader
         Me.lstData.Location = New System.Drawing.Point(0, 261)
         Me.lstData.MultiSelect = False
         Me.lstData.Name = "lstData"
-        Me.lstData.Size = New System.Drawing.Size(861, 321)
+        Me.lstData.Size = New System.Drawing.Size(923, 321)
         Me.lstData.TabIndex = 8
         Me.lstData.UseCompatibleStateImageBehavior = False
         Me.lstData.View = System.Windows.Forms.View.Details
@@ -187,12 +190,14 @@ Partial Class GueBankPDFReader
         Me.pnlTop.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlTop.Location = New System.Drawing.Point(0, 0)
         Me.pnlTop.Name = "pnlTop"
-        Me.pnlTop.Size = New System.Drawing.Size(861, 62)
+        Me.pnlTop.Size = New System.Drawing.Size(923, 62)
         Me.pnlTop.TabIndex = 9
         '
         'pnlCmd
         '
         Me.pnlCmd.BackColor = System.Drawing.Color.White
+        Me.pnlCmd.Controls.Add(Me.numHalaman)
+        Me.pnlCmd.Controls.Add(Me.Label4)
         Me.pnlCmd.Controls.Add(Me.CheckBox3)
         Me.pnlCmd.Controls.Add(Me.CheckBox2)
         Me.pnlCmd.Controls.Add(Me.chkTipe)
@@ -206,18 +211,101 @@ Partial Class GueBankPDFReader
         Me.pnlCmd.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlCmd.Location = New System.Drawing.Point(0, 62)
         Me.pnlCmd.Name = "pnlCmd"
-        Me.pnlCmd.Size = New System.Drawing.Size(861, 36)
+        Me.pnlCmd.Size = New System.Drawing.Size(923, 36)
         Me.pnlCmd.TabIndex = 10
+        '
+        'CheckBox3
+        '
+        Me.CheckBox3.AutoSize = True
+        Me.CheckBox3.Checked = True
+        Me.CheckBox3.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CheckBox3.Enabled = False
+        Me.CheckBox3.Location = New System.Drawing.Point(858, 10)
+        Me.CheckBox3.Name = "CheckBox3"
+        Me.CheckBox3.Size = New System.Drawing.Size(53, 17)
+        Me.CheckBox3.TabIndex = 13
+        Me.CheckBox3.Text = "Kredit"
+        Me.CheckBox3.UseVisualStyleBackColor = True
+        '
+        'CheckBox2
+        '
+        Me.CheckBox2.AutoSize = True
+        Me.CheckBox2.Checked = True
+        Me.CheckBox2.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CheckBox2.Enabled = False
+        Me.CheckBox2.Location = New System.Drawing.Point(801, 10)
+        Me.CheckBox2.Name = "CheckBox2"
+        Me.CheckBox2.Size = New System.Drawing.Size(51, 17)
+        Me.CheckBox2.TabIndex = 12
+        Me.CheckBox2.Text = "Debit"
+        Me.CheckBox2.UseVisualStyleBackColor = True
+        '
+        'chkTipe
+        '
+        Me.chkTipe.AutoSize = True
+        Me.chkTipe.Location = New System.Drawing.Point(734, 9)
+        Me.chkTipe.Name = "chkTipe"
+        Me.chkTipe.Size = New System.Drawing.Size(47, 17)
+        Me.chkTipe.TabIndex = 11
+        Me.chkTipe.Text = "Tipe"
+        Me.chkTipe.UseVisualStyleBackColor = True
+        '
+        'chkKet
+        '
+        Me.chkKet.AutoSize = True
+        Me.chkKet.Checked = True
+        Me.chkKet.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkKet.Location = New System.Drawing.Point(647, 10)
+        Me.chkKet.Name = "chkKet"
+        Me.chkKet.Size = New System.Drawing.Size(81, 17)
+        Me.chkKet.TabIndex = 10
+        Me.chkKet.Text = "Keterangan"
+        Me.chkKet.UseVisualStyleBackColor = True
+        '
+        'chkNama
+        '
+        Me.chkNama.AutoSize = True
+        Me.chkNama.Checked = True
+        Me.chkNama.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkNama.Location = New System.Drawing.Point(587, 10)
+        Me.chkNama.Name = "chkNama"
+        Me.chkNama.Size = New System.Drawing.Size(54, 17)
+        Me.chkNama.TabIndex = 9
+        Me.chkNama.Text = "Nama"
+        Me.chkNama.UseVisualStyleBackColor = True
+        '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Checked = True
+        Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CheckBox1.Enabled = False
+        Me.CheckBox1.Location = New System.Drawing.Point(516, 10)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(65, 17)
+        Me.CheckBox1.TabIndex = 8
+        Me.CheckBox1.Text = "Tanggal"
+        Me.CheckBox1.UseVisualStyleBackColor = True
+        '
+        'btnCopy
+        '
+        Me.btnCopy.BackColor = System.Drawing.Color.Aqua
+        Me.btnCopy.Location = New System.Drawing.Point(313, 6)
+        Me.btnCopy.Name = "btnCopy"
+        Me.btnCopy.Size = New System.Drawing.Size(135, 23)
+        Me.btnCopy.TabIndex = 6
+        Me.btnCopy.Text = "Copy data ke Excel"
+        Me.btnCopy.UseVisualStyleBackColor = False
         '
         'lblCopyToExcel
         '
         Me.lblCopyToExcel.AutoSize = True
         Me.lblCopyToExcel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCopyToExcel.ForeColor = System.Drawing.Color.MediumBlue
-        Me.lblCopyToExcel.Location = New System.Drawing.Point(322, 9)
+        Me.lblCopyToExcel.Location = New System.Drawing.Point(454, 9)
         Me.lblCopyToExcel.Name = "lblCopyToExcel"
         Me.lblCopyToExcel.Size = New System.Drawing.Size(56, 15)
-        Me.lblCopyToExcel.TabIndex = 6
+        Me.lblCopyToExcel.TabIndex = 7
         Me.lblCopyToExcel.Text = "Format:"
         '
         'pnlInfo
@@ -230,7 +318,7 @@ Partial Class GueBankPDFReader
         Me.pnlInfo.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlInfo.Location = New System.Drawing.Point(0, 98)
         Me.pnlInfo.Name = "pnlInfo"
-        Me.pnlInfo.Size = New System.Drawing.Size(861, 163)
+        Me.pnlInfo.Size = New System.Drawing.Size(923, 163)
         Me.pnlInfo.TabIndex = 11
         '
         'pnlBottom
@@ -242,101 +330,8 @@ Partial Class GueBankPDFReader
         Me.pnlBottom.Margin = New System.Windows.Forms.Padding(8)
         Me.pnlBottom.Name = "pnlBottom"
         Me.pnlBottom.Padding = New System.Windows.Forms.Padding(3)
-        Me.pnlBottom.Size = New System.Drawing.Size(861, 28)
+        Me.pnlBottom.Size = New System.Drawing.Size(923, 28)
         Me.pnlBottom.TabIndex = 12
-        '
-        'lblVersion
-        '
-        Me.lblVersion.AutoSize = True
-        Me.lblVersion.Dock = System.Windows.Forms.DockStyle.Left
-        Me.lblVersion.Location = New System.Drawing.Point(3, 3)
-        Me.lblVersion.Name = "lblVersion"
-        Me.lblVersion.Size = New System.Drawing.Size(26, 13)
-        Me.lblVersion.TabIndex = 0
-        Me.lblVersion.Text = "Ver."
-        '
-        'btnCopy
-        '
-        Me.btnCopy.BackColor = System.Drawing.Color.Aqua
-        Me.btnCopy.Location = New System.Drawing.Point(181, 6)
-        Me.btnCopy.Name = "btnCopy"
-        Me.btnCopy.Size = New System.Drawing.Size(135, 23)
-        Me.btnCopy.TabIndex = 7
-        Me.btnCopy.Text = "Copy data ke Excel"
-        Me.btnCopy.UseVisualStyleBackColor = False
-        '
-        'CheckBox1
-        '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Checked = True
-        Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox1.Enabled = False
-        Me.CheckBox1.Location = New System.Drawing.Point(384, 10)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(65, 17)
-        Me.CheckBox1.TabIndex = 8
-        Me.CheckBox1.Text = "Tanggal"
-        Me.CheckBox1.UseVisualStyleBackColor = True
-        '
-        'chkNama
-        '
-        Me.chkNama.AutoSize = True
-        Me.chkNama.Checked = True
-        Me.chkNama.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkNama.Location = New System.Drawing.Point(455, 10)
-        Me.chkNama.Name = "chkNama"
-        Me.chkNama.Size = New System.Drawing.Size(54, 17)
-        Me.chkNama.TabIndex = 9
-        Me.chkNama.Text = "Nama"
-        Me.chkNama.UseVisualStyleBackColor = True
-        '
-        'chkKet
-        '
-        Me.chkKet.AutoSize = True
-        Me.chkKet.Checked = True
-        Me.chkKet.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkKet.Location = New System.Drawing.Point(515, 10)
-        Me.chkKet.Name = "chkKet"
-        Me.chkKet.Size = New System.Drawing.Size(81, 17)
-        Me.chkKet.TabIndex = 10
-        Me.chkKet.Text = "Keterangan"
-        Me.chkKet.UseVisualStyleBackColor = True
-        '
-        'chkTipe
-        '
-        Me.chkTipe.AutoSize = True
-        Me.chkTipe.Location = New System.Drawing.Point(602, 9)
-        Me.chkTipe.Name = "chkTipe"
-        Me.chkTipe.Size = New System.Drawing.Size(47, 17)
-        Me.chkTipe.TabIndex = 11
-        Me.chkTipe.Text = "Tipe"
-        Me.chkTipe.UseVisualStyleBackColor = True
-        '
-        'CheckBox2
-        '
-        Me.CheckBox2.AutoSize = True
-        Me.CheckBox2.Checked = True
-        Me.CheckBox2.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox2.Enabled = False
-        Me.CheckBox2.Location = New System.Drawing.Point(669, 10)
-        Me.CheckBox2.Name = "CheckBox2"
-        Me.CheckBox2.Size = New System.Drawing.Size(51, 17)
-        Me.CheckBox2.TabIndex = 12
-        Me.CheckBox2.Text = "Debit"
-        Me.CheckBox2.UseVisualStyleBackColor = True
-        '
-        'CheckBox3
-        '
-        Me.CheckBox3.AutoSize = True
-        Me.CheckBox3.Checked = True
-        Me.CheckBox3.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox3.Enabled = False
-        Me.CheckBox3.Location = New System.Drawing.Point(726, 10)
-        Me.CheckBox3.Name = "CheckBox3"
-        Me.CheckBox3.Size = New System.Drawing.Size(53, 17)
-        Me.CheckBox3.TabIndex = 13
-        Me.CheckBox3.Text = "Kredit"
-        Me.CheckBox3.UseVisualStyleBackColor = True
         '
         'lblStatus
         '
@@ -348,11 +343,39 @@ Partial Class GueBankPDFReader
         Me.lblStatus.Size = New System.Drawing.Size(8, 13)
         Me.lblStatus.TabIndex = 1
         '
+        'lblVersion
+        '
+        Me.lblVersion.AutoSize = True
+        Me.lblVersion.Dock = System.Windows.Forms.DockStyle.Left
+        Me.lblVersion.Location = New System.Drawing.Point(3, 3)
+        Me.lblVersion.Name = "lblVersion"
+        Me.lblVersion.Size = New System.Drawing.Size(26, 13)
+        Me.lblVersion.TabIndex = 0
+        Me.lblVersion.Text = "Ver."
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(93, 11)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(78, 13)
+        Me.Label4.TabIndex = 3
+        Me.Label4.Text = "Mulai halaman:"
+        '
+        'numHalaman
+        '
+        Me.numHalaman.Location = New System.Drawing.Point(177, 9)
+        Me.numHalaman.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.numHalaman.Name = "numHalaman"
+        Me.numHalaman.Size = New System.Drawing.Size(44, 20)
+        Me.numHalaman.TabIndex = 4
+        Me.numHalaman.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
         'GueBankPDFReader
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(861, 610)
+        Me.ClientSize = New System.Drawing.Size(923, 610)
         Me.Controls.Add(Me.lstData)
         Me.Controls.Add(Me.pnlBottom)
         Me.Controls.Add(Me.pnlInfo)
@@ -369,6 +392,7 @@ Partial Class GueBankPDFReader
         Me.pnlInfo.PerformLayout()
         Me.pnlBottom.ResumeLayout(False)
         Me.pnlBottom.PerformLayout()
+        CType(Me.numHalaman, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -403,4 +427,6 @@ Partial Class GueBankPDFReader
     Friend WithEvents chkTipe As CheckBox
     Friend WithEvents chkKet As CheckBox
     Friend WithEvents lblStatus As Label
+    Friend WithEvents numHalaman As NumericUpDown
+    Friend WithEvents Label4 As Label
 End Class

@@ -1,7 +1,8 @@
 ﻿Imports System.ComponentModel
+Imports System.Globalization
 Imports iText.Kernel.Geom
 
-Public Class BankBCA
+Public Class BankBSI
     Implements IGueBank
 
     Private linesPDFText As String()
@@ -15,8 +16,9 @@ Public Class BankBCA
     Private daftarTransaksi As List(Of BankTrans)
 
     Public Sub New()
-        Console.WriteLine("Type: Bank BCA")
+        Console.WriteLine("Type: Bank BSI")
     End Sub
+
     Public Sub ShowError()
         MsgBox(errorText, MsgBoxStyle.Exclamation)
     End Sub
@@ -50,28 +52,36 @@ Public Class BankBCA
 
     Private Function ParseHeader() As Boolean
         If linesPDFText.Length <= 16 Then
-            errorText = "Sepertinya bukan rekening BCA"
+            errorText = "Sepertinya bukan rekening BSI"
             Return False
         End If
         Dim tmp As String
 
-        bankInfo.NamaBank = "BANK BCA"
+        'Get name
+        bankInfo.NamaBank = "BSI"
+        bankInfo.NamaRekening = linesPDFText(1)
 
-        For i As Integer = 0 To 25
+        'Get period
+        tmp = linesPDFText(2).Replace("Periode : ", "")
+        Dim tmp2 = tmp.Split(" ")
+        Dim tahun = CInt(tmp2(4))
+        periode = DateTime.Parse("1 " & tmp2(3) & " " & tahun)
+
+        'Get account name
+        tmp = linesPDFText(8)
+        If tmp.StartsWith("BSI TABUNGAN EASY MUDHARABAH") Then
+            bankInfo.TipeRekening = "BSI TABUNGAN EASY MUDHARABAH"
+        ElseIf tmp.StartsWith("BSI TAB HAJI INDONESIA MUDHARABAH") Then
+            bankInfo.TipeRekening = "BSI TAB HAJI INDONESIA MUDHARABAH"
+        End If
+        tmp = tmp.Replace(bankInfo.TipeRekening & " - ", "")
+        bankInfo.MataUang = tmp.Substring(0, 3)
+        tmp = tmp.Replace(bankInfo.MataUang & " - ", "")
+        bankInfo.NomorRekening = tmp.Substring(0, 10)
+
+        For i As Integer = 9 To 25
             tmp = linesPDFText(i).Trim
-            If (tmp.StartsWith("REKENING")) Then
-                bankInfo.TipeRekening = tmp
-            ElseIf (tmp.StartsWith("NO. REKENING")) Then
-                bankInfo.NomorRekening = tmp.Replace("NO. REKENING : ", "")
-                bankInfo.NamaRekening = linesPDFText(i - 1).Trim
-            ElseIf (tmp.StartsWith("PERIODE")) Then
-                Dim tmp2 = tmp.Replace("PERIODE : ", "")
-                Dim tahun = Strings.Right(tmp2, 4)
-                Dim bulan = tmp2.Replace(" " & tahun, "")
-                periode = New Date(year:=CInt(tahun), month:=GueUtils.GetBulanIndonesia(bulan), day:=1)
-            ElseIf (tmp.StartsWith("MATA UANG")) Then
-                bankInfo.MataUang = Strings.Right(tmp, 3)
-            ElseIf (tmp = "TANGGAL KETERANGAN CBG MUTASI SALDO") Then
+            If (tmp = "Date & Time Detail Transaksi No Reﬀ Debit Kredit Saldo") Then
                 lastIndex = i
                 Exit For
             End If
@@ -81,7 +91,7 @@ Public Class BankBCA
 
     Private Function ParseBody() As Boolean
         daftarTransaksi = New List(Of BankTrans)
-        Dim bca = New BCALineAnalyzer(linesPDFText, periode)
+        Dim bsi = New BSILineAnalyzer(linesPDFText, periode)
 
         For i As Integer = lastIndex + 1 To linesPDFText.Length - 1
 
@@ -101,11 +111,11 @@ Public Class BankBCA
                 End If
             Else
 
-                Dim bcaTrans = bca.AnalyzeLine(i)
+                Dim bsiTrx = bsi.AnalyzeLine(i)
 
-                If bcaTrans IsNot Nothing Then
-                    daftarTransaksi.Add(bcaTrans.GetBankTrans())
-                    i += bcaTrans.GetLastIndex
+                If bsiTrx IsNot Nothing Then
+                    daftarTransaksi.Add(bsiTrx.GetBankTrans())
+                    i += bsiTrx.GetLastIndex
                 End If
             End If
         Next

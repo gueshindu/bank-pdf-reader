@@ -187,6 +187,9 @@
     <Compile Include="Lib\Bank\BCA\BCATarikanATM.vb" />
     <Compile Include="Lib\Bank\BCA\BCATrans.vb" />
     <Compile Include="Lib\Bank\BCA\BCATransferEbanking.vb" />
+    <Compile Include="Lib\Bank\BSI\BankBSI.vb" />
+    <Compile Include="Lib\Bank\BSI\BSILineAnalyzer.vb" />
+    <Compile Include="Lib\Bank\BSI\BSITrans.vb" />
     <Compile Include="Lib\GuePdfParser.vb" />
     <Compile Include="Lib\Bank\IGueBank.vb" />
     <Compile Include="Lib\GueUtils.vb" />
@@ -237,5 +240,6 @@
   <ItemGroup>
     <Content Include="Bank_Check_27026.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

@@ -30,7 +30,9 @@
 
     Private Sub ProcessDone()
         lblCopyToExcel.Visible = True
-        Clipboard.SetText(stringToClipBoard)
+        If (stringToClipBoard <> "") Then
+            Clipboard.SetText(stringToClipBoard)
+        End If
         btnProcess.Enabled = False
         btnOpen.Enabled = True
         btnCopy.Enabled = True
@@ -57,7 +59,8 @@
 
         Dim parser = New GuePdfParser(lblFileName.Text)
 
-        parser.SetBank(New BankBCA())
+        'parser.SetBank(New BankBCA())
+        parser.SetBankAuto()
         parser.ReadBankDocument()
 
         listBankTrans?.Clear()
@@ -107,7 +110,7 @@
     End Sub
 
 
-    Private Sub btnCopy_Click(sender As Object, e As EventArgs) Handles btnCopy.Click
+    Private Sub BtnCopy_Click(sender As Object, e As EventArgs) Handles btnCopy.Click
         IsiGrid()
         Clipboard.SetText(stringToClipBoard)
     End Sub
