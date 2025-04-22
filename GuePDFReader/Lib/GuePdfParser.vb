@@ -43,7 +43,13 @@ Public Class GuePdfParser
 
     Public Function OpenPDFFile() As Boolean
         If IO.File.Exists(pdfFile) Then
-            Dim pdfDoc = New PdfDocument(New PdfReader(pdfFile))
+            Dim pdfRead As PdfReader
+            pdfRead = New PdfReader(pdfFile)
+
+
+
+            Dim pdfDoc = New PdfDocument(pdfRead)
+
             Dim numPage = pdfDoc.GetNumberOfPages()
             textToParsePerPage = New List(Of String)
             textToParse = ""

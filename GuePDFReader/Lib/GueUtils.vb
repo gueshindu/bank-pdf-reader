@@ -34,6 +34,11 @@ Public Class GueUtils
 
     Public Shared Function ParseDouble(strDouble As String, Optional usingENUSFormat As Boolean = True) As Double
         Dim format As IFormatProvider
+
+        If (strDouble = "") Then
+            Return 0.0
+        End If
+
         If usingENUSFormat Then
             format = CultureInfo.CreateSpecificCulture("en-US")
         Else
