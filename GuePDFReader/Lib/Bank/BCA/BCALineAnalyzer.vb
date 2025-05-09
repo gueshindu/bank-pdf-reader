@@ -35,6 +35,16 @@ Public Class BCALineAnalyzer
             Return New BCAKoreksiBunga(line, periode)
         ElseIf transType.StartsWith(BCAPajakBunga.TRANS_TYPE) Then 'PAJAK BUNGA
             Return New BCAPajakBunga(line, periode)
+        ElseIf transType.StartsWith(BCAKartuDebit.TRANS_TYPE) Then 'Kartu debit
+            Return New BCAKartuDebit(line, periode)
+        ElseIf transType.StartsWith(BCATransaksiDebit.TRANS_TYPE) Then 'Transaksi debit
+            Return New BCATransaksiDebit(line, periode)
+        ElseIf transType.StartsWith(BCAFlazz.TRANS_TYPE) Then 'Isi flazz
+            Return New BCAFlazz(line, periode)
+        ElseIf transType.StartsWith(BCADebitDomestik.TRANS_TYPE) Then 'Isi flazz
+            Return New BCADebitDomestik(line, periode)
+        ElseIf transType.StartsWith(BCAByrEbanking.TRANS_TYPE) Then 'Isi flazz
+            Return New BCAByrEbanking(line, periode)
         ElseIf transType.StartsWith(BCATransferEbanking.TRANS_TYPE) Then 'TRF E BANKING
             Return RunMultiLineTrans(New BCATransferEbanking(line, periode), lineIndex)
         ElseIf transType.StartsWith(BCABIFast.TRANS_TYPE) Then 'TRF BI FAST

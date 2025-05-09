@@ -8,6 +8,7 @@
         InitForm()
 
         lblVersion.Text = "Versi: " & My.Application.Info.Version.ToString
+        lblVersion.Text += " -- " + My.Application.Info.Description
 
     End Sub
 

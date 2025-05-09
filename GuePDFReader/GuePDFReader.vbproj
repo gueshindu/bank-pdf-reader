@@ -193,6 +193,11 @@
     <Compile Include="Lib\Bank\BCA\BCATarikanATM.vb" />
     <Compile Include="Lib\Bank\BCA\BCATrans.vb" />
     <Compile Include="Lib\Bank\BCA\BCATransferEbanking.vb" />
+    <Compile Include="Lib\Bank\BCA\BCAKartuDebit.vb" />
+    <Compile Include="Lib\Bank\BCA\BCATransaksiDebit.vb" />
+    <Compile Include="Lib\Bank\BCA\BCAFlazz.vb" />
+    <Compile Include="Lib\Bank\BCA\BCAByrEbanking.vb" />
+    <Compile Include="Lib\Bank\BCA\BCADebitDomestik.vb" />
     <Compile Include="Lib\Bank\BSI\BankBSI.vb" />
     <Compile Include="Lib\Bank\BSI\BSILineAnalyzer.vb" />
     <Compile Include="Lib\Bank\BSI\BSITrans.vb" />

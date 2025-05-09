@@ -41,6 +41,8 @@ Partial Class GueBankPDFReader
         Me.colMutasi = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.pnlTop = New System.Windows.Forms.Panel()
         Me.pnlCmd = New System.Windows.Forms.Panel()
+        Me.numHalaman = New System.Windows.Forms.NumericUpDown()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.CheckBox3 = New System.Windows.Forms.CheckBox()
         Me.CheckBox2 = New System.Windows.Forms.CheckBox()
         Me.chkTipe = New System.Windows.Forms.CheckBox()
@@ -53,13 +55,11 @@ Partial Class GueBankPDFReader
         Me.pnlBottom = New System.Windows.Forms.Panel()
         Me.lblStatus = New System.Windows.Forms.Label()
         Me.lblVersion = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.numHalaman = New System.Windows.Forms.NumericUpDown()
         Me.pnlTop.SuspendLayout()
         Me.pnlCmd.SuspendLayout()
+        CType(Me.numHalaman, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlInfo.SuspendLayout()
         Me.pnlBottom.SuspendLayout()
-        CType(Me.numHalaman, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblTitle
@@ -214,6 +214,24 @@ Partial Class GueBankPDFReader
         Me.pnlCmd.Size = New System.Drawing.Size(923, 36)
         Me.pnlCmd.TabIndex = 10
         '
+        'numHalaman
+        '
+        Me.numHalaman.Location = New System.Drawing.Point(177, 9)
+        Me.numHalaman.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.numHalaman.Name = "numHalaman"
+        Me.numHalaman.Size = New System.Drawing.Size(44, 20)
+        Me.numHalaman.TabIndex = 4
+        Me.numHalaman.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(93, 11)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(78, 13)
+        Me.Label4.TabIndex = 3
+        Me.Label4.Text = "Mulai halaman:"
+        '
         'CheckBox3
         '
         Me.CheckBox3.AutoSize = True
@@ -353,24 +371,6 @@ Partial Class GueBankPDFReader
         Me.lblVersion.TabIndex = 0
         Me.lblVersion.Text = "Ver."
         '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(93, 11)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(78, 13)
-        Me.Label4.TabIndex = 3
-        Me.Label4.Text = "Mulai halaman:"
-        '
-        'numHalaman
-        '
-        Me.numHalaman.Location = New System.Drawing.Point(177, 9)
-        Me.numHalaman.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.numHalaman.Name = "numHalaman"
-        Me.numHalaman.Size = New System.Drawing.Size(44, 20)
-        Me.numHalaman.TabIndex = 4
-        Me.numHalaman.Value = New Decimal(New Integer() {1, 0, 0, 0})
-        '
         'GueBankPDFReader
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -388,11 +388,11 @@ Partial Class GueBankPDFReader
         Me.pnlTop.PerformLayout()
         Me.pnlCmd.ResumeLayout(False)
         Me.pnlCmd.PerformLayout()
+        CType(Me.numHalaman, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlInfo.ResumeLayout(False)
         Me.pnlInfo.PerformLayout()
         Me.pnlBottom.ResumeLayout(False)
         Me.pnlBottom.PerformLayout()
-        CType(Me.numHalaman, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

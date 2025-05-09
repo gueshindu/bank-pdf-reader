@@ -1,4 +1,6 @@
-﻿Public Class BCABunga
+﻿Imports iText.Kernel.Geom
+
+Public Class BCABunga
     Inherits BCATrans
 
     Public Const TRANS_TYPE = "BUNGA"
@@ -9,7 +11,8 @@
         '31/01 BUNGA2,132.14 183,853,153.10
 
         oneLineTrans = oneLineTrans.Replace(TRANS_TYPE, "")  '31/01 2,132.14 183,853,153.10
-        Dim split2 = oneLineTrans.Split(" ")
+        ' Dim split2 = oneLineTrans.Split(" ")
+        Dim split2 = oneLineTrans.Split(CType(" ", Char()), StringSplitOptions.RemoveEmptyEntries)
 
         bankTrans.TransType = TRANS_TYPE
         bankTrans.DBCR = "CR"

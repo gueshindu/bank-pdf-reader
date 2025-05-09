@@ -1,20 +1,13 @@
-﻿Public Class BCABiayaAdmin
+﻿Public Class BCAKartuDebit
     Inherits BCATrans
 
-    Public Const TRANS_TYPE = "BIAYA ADM"
+    Public Const TRANS_TYPE = "KARTU DEBIT"
 
     Public Sub New(oneLineTrans As String, periode As Date)
         MyBase.New(oneLineTrans, periode)
 
-        'Contoh format: 31/01 BIAYA ADM30,000.00 DB 33,969,734.00
-        'If (splitLine.Length > 2) Then
-        '    bankTrans.TransType = "BIAYA ADMIN"
-        '    bankTrans.Keterangan = bankTrans.TransType
-        '    Dim tmp = splitLine(2).Replace("ADM", "")
-        '    bankTrans.Mutasi = GueUtils.ParseDouble(tmp)
-        'End If
-
-
+        'Contoh format: 02/01 TARIKAN ATM 31/12 2,500,000.00 DB
+        'Tidak diketahui penyebanya hasilnya sepeti ini: 02/01 TARIKAN ATM 31/122,500,000.00 DB
         If (bankTrans.DBCR = "DB") Then
             bankTrans.TransType = TRANS_TYPE
             bankTrans.Keterangan = bankTrans.TransType
