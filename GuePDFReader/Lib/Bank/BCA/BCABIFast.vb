@@ -15,7 +15,7 @@ Public Class BCABIFast
         bankTrans.TransType = TRANS_TYPE
         For i As Integer = lastLineIndex + 1 To splitLine.Length - 1
             Dim tmp = splitLine(i)
-            If IsNumeric(tmp.Replace(",", "")) Then
+            If GueUtils.IsNumeric(tmp.Replace(",", "")) Then
                 bankTrans.Mutasi = GueUtils.ParseDouble(tmp)
                 Exit For
             Else

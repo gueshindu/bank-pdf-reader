@@ -22,7 +22,7 @@
             bankTrans.Keterangan = bankTrans.TransType
             Dim mutasi = splitLine(lastLineIndex - 1) '==> 31/122,500,000.00
 
-            If Not IsNumeric(mutasi) Then
+            If Not GueUtils.IsNumeric(mutasi) Then
                 mutasi = mutasi.Substring(5) ' ==> 2,500,000.00
             End If
             bankTrans.Mutasi = GueUtils.ParseDouble(mutasi)

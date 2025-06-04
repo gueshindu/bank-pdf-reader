@@ -11,7 +11,8 @@ Public Class BankBSI
     Private bankInfo As BankInfo
     Private periode As Date
 
-    Private lastIndex As Integer
+    'Private lastIndex As Integer
+    Private alreadySaldoAwal As Boolean
 
     Private daftarTransaksi As List(Of BankTrans)
 
@@ -36,7 +37,6 @@ Public Class BankBSI
         End If
         Return result
     End Function
-
 
     Public Function GetBankInfo() As BankInfo Implements IGueBank.GetBankInfo
         Return bankInfo
@@ -82,7 +82,7 @@ Public Class BankBSI
         For i As Integer = 9 To 25
             tmp = linesPDFText(i).Trim
             If (tmp = "Date & Time Detail Transaksi No Reﬀ Debit Kredit Saldo") Then
-                lastIndex = i
+                'lastIndex = i
                 Exit For
             End If
         Next
@@ -93,22 +93,35 @@ Public Class BankBSI
         daftarTransaksi = New List(Of BankTrans)
         Dim bsi = New BSILineAnalyzer(linesPDFText, periode)
 
-        For i As Integer = lastIndex + 1 To linesPDFText.Length - 1
+        For i As Integer = 8 To linesPDFText.Length - 1
+            Console.WriteLine(i & ". " & linesPDFText(i))
 
-            If (i > linesPDFText.Length - 6) Then
-                Dim line = linesPDFText(i)
-                Dim lineSplit = line.Split(CType(" ", Char()), StringSplitOptions.RemoveEmptyEntries)
-
-                'FOOTER
-                If line.StartsWith("SALDO AWAL :") Then
-                    bankInfo.SaldoAwal = GueUtils.ParseDouble(lineSplit(3))
-                ElseIf line.StartsWith("MUTASI CR :") Then
-                    bankInfo.CR = GueUtils.ParseDouble(lineSplit(3))
-                ElseIf line.StartsWith("MUTASI DB :") Then
-                    bankInfo.DB = GueUtils.ParseDouble(lineSplit(3))
-                ElseIf line.StartsWith("SALDO AKHIR :") Then
-                    bankInfo.SaldoAkhir = GueUtils.ParseDouble(lineSplit(3))
+            If linesPDFText(i).Contains(bankInfo.TipeRekening) And Not alreadySaldoAwal Then
+                Dim bsiTrx = New BSISaldoAwal(linesPDFText(i), periode)
+                If bsiTrx IsNot Nothing Then
+                    daftarTransaksi.Add(bsiTrx.GetBankTrans())
+                    alreadySaldoAwal = True
                 End If
+                i += 1 'Loncati header
+            ElseIf linesPDFText(i).Contains("--- AKHIR LAPORAN ---") Then
+                'Footer
+                Dim line = linesPDFText(i - 3)
+                Dim lineSplit = line.Split(CType(" ", Char()), StringSplitOptions.RemoveEmptyEntries)
+                bankInfo.SaldoAkhir = GueUtils.ParseDouble(lineSplit.Last)
+                '
+                line = linesPDFText(i - 4)
+                lineSplit = line.Split(CType(" ", Char()), StringSplitOptions.RemoveEmptyEntries)
+                bankInfo.DB = GueUtils.ParseDouble(lineSplit.Last)
+                '
+                line = linesPDFText(i - 5)
+                lineSplit = line.Split(CType(" ", Char()), StringSplitOptions.RemoveEmptyEntries)
+                bankInfo.CR = GueUtils.ParseDouble(lineSplit.Last)
+                '
+                line = linesPDFText(i - 6)
+                lineSplit = line.Split(CType(" ", Char()), StringSplitOptions.RemoveEmptyEntries)
+                bankInfo.SaldoAwal = GueUtils.ParseDouble(lineSplit.Last)
+                Return True
+
             Else
 
                 Dim bsiTrx = bsi.AnalyzeLine(i)

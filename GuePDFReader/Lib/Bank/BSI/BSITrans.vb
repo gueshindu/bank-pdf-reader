@@ -24,8 +24,9 @@
     End Sub
 
     Protected Function IsFirstLine() As Boolean
-        If splitLine.Length > 1 Then
-            If splitLine(0).Trim.Length = 5 And splitLine(0).Contains("/") Then
+        If splitLine.Length >= 8 Then
+            Dim dateString = splitLine(0) & " " & splitLine(1) & " " & splitLine(2)
+            If IsDate(dateString) Then
                 Return True
             End If
         End If
@@ -46,13 +47,11 @@
         For i As Integer = 0 To splitLine.Length - 1
             Dim tmp = splitLine(i)
 
-            If i = 0 Then
+            If i < 3 Then
                 'tanggal
-                bankTrans.TransDate = New Date(periode.Year, periode.Month, CInt(tmp.Substring(0, 2)))
-            ElseIf tmp = "DB" Or tmp = "CR" Then
-                'DB/CR
-                bankTrans.DBCR = tmp
-                lastLineIndex = i
+                bankTrans.TransDate = New Date(periode.Year, periode.Month, CInt(splitLine(0)))
+                i = 3
+            Else
                 bankTrans.IsValid = True
                 Exit For
             End If

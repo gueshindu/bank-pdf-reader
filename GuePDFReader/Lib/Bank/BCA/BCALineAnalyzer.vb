@@ -27,6 +27,8 @@ Public Class BCALineAnalyzer
             Return New BCABiayaAdmin(line, periode)
         ElseIf transType.StartsWith(BCATarikanATM.TRANS_TYPE) Then 'TARIKAN ATM
             Return New BCATarikanATM(line, periode)
+        ElseIf transType.StartsWith(BCATarikTunai.TRANS_TYPE) Then 'TARIKAN ATM
+            Return New BCATarikTunai(line, periode)
         ElseIf transType.StartsWith(BCASetoranTunai.TRANS_TYPE) Then 'SERTORAN TUNAI
             Return New BCASetoranTunai(line, periode)
         ElseIf transType.StartsWith(BCABunga.TRANS_TYPE) Then 'BUNGA
@@ -41,10 +43,14 @@ Public Class BCALineAnalyzer
             Return New BCATransaksiDebit(line, periode)
         ElseIf transType.StartsWith(BCAFlazz.TRANS_TYPE) Then 'Isi flazz
             Return New BCAFlazz(line, periode)
-        ElseIf transType.StartsWith(BCADebitDomestik.TRANS_TYPE) Then 'Isi flazz
+        ElseIf transType.StartsWith(BCADebitDomestik.TRANS_TYPE) Then 'Debit domestik
             Return New BCADebitDomestik(line, periode)
-        ElseIf transType.StartsWith(BCAByrEbanking.TRANS_TYPE) Then 'Isi flazz
+        ElseIf transType.StartsWith(BCAByrEbanking.TRANS_TYPE) Then 'Bayar ebanking
             Return New BCAByrEbanking(line, periode)
+        ElseIf transType.StartsWith(BCASetoranViaCDM.TRANS_TYPE) Then 'Setoran viacdm
+            Return New BCASetoranViaCDM(line, periode)
+        ElseIf transType.StartsWith(BCADebetInterchange.TRANS_TYPE) Then 'DB debet interchange
+            Return New BCADebetInterchange(line, periode)
         ElseIf transType.StartsWith(BCATransferEbanking.TRANS_TYPE) Then 'TRF E BANKING
             Return RunMultiLineTrans(New BCATransferEbanking(line, periode), lineIndex)
         ElseIf transType.StartsWith(BCABIFast.TRANS_TYPE) Then 'TRF BI FAST

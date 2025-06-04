@@ -52,6 +52,7 @@ Partial Class GueBankPDFReader
         Me.btnCopy = New System.Windows.Forms.Button()
         Me.lblCopyToExcel = New System.Windows.Forms.Label()
         Me.pnlInfo = New System.Windows.Forms.Panel()
+        Me.lblDBCR = New System.Windows.Forms.Label()
         Me.pnlBottom = New System.Windows.Forms.Panel()
         Me.lblStatus = New System.Windows.Forms.Label()
         Me.lblVersion = New System.Windows.Forms.Label()
@@ -329,6 +330,7 @@ Partial Class GueBankPDFReader
         'pnlInfo
         '
         Me.pnlInfo.BackColor = System.Drawing.Color.White
+        Me.pnlInfo.Controls.Add(Me.lblDBCR)
         Me.pnlInfo.Controls.Add(Me.Label2)
         Me.pnlInfo.Controls.Add(Me.lblFileName)
         Me.pnlInfo.Controls.Add(Me.Label3)
@@ -338,6 +340,15 @@ Partial Class GueBankPDFReader
         Me.pnlInfo.Name = "pnlInfo"
         Me.pnlInfo.Size = New System.Drawing.Size(923, 163)
         Me.pnlInfo.TabIndex = 11
+        '
+        'lblDBCR
+        '
+        Me.lblDBCR.AutoSize = True
+        Me.lblDBCR.Location = New System.Drawing.Point(644, 32)
+        Me.lblDBCR.Name = "lblDBCR"
+        Me.lblDBCR.Size = New System.Drawing.Size(10, 13)
+        Me.lblDBCR.TabIndex = 8
+        Me.lblDBCR.Text = "-"
         '
         'pnlBottom
         '
@@ -429,4 +440,5 @@ Partial Class GueBankPDFReader
     Friend WithEvents lblStatus As Label
     Friend WithEvents numHalaman As NumericUpDown
     Friend WithEvents Label4 As Label
+    Friend WithEvents lblDBCR As Label
 End Class

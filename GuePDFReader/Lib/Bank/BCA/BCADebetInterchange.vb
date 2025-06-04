@@ -1,13 +1,22 @@
-﻿Public Class BCAKartuDebit
+﻿Public Class BCADebetInterchange
     Inherits BCATrans
 
-    Public Const TRANS_TYPE = "KARTU DEBIT"
+    Public Const TRANS_TYPE = "DB INTERCHANGE"
 
     Public Sub New(oneLineTrans As String, periode As Date)
         MyBase.New(oneLineTrans, periode)
 
-        'Contoh format: 02/01 TARIKAN ATM 31/12 2,500,000.00 DB
-        'Tidak diketahui penyebanya hasilnya sepeti ini: 02/01 TARIKAN ATM 31/122,500,000.00 DB
+        For i As Integer = 2 To splitLine.Length - 1
+            Dim tmp = splitLine(i)
+
+            If tmp = "DB" Then
+                'DB/CR
+                lastLineIndex = i
+                bankTrans.IsValid = True
+                Exit For
+            End If
+        Next
+
         If (bankTrans.DBCR = "DB") Then
             bankTrans.TransType = TRANS_TYPE
             bankTrans.Keterangan = bankTrans.TransType

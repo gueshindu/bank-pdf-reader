@@ -1,7 +1,7 @@
-﻿Public Class BCAKartuDebit
+﻿Public Class BCATarikTunai
     Inherits BCATrans
 
-    Public Const TRANS_TYPE = "KARTU DEBIT"
+    Public Const TRANS_TYPE = "TARIKAN TUNAI"
 
     Public Sub New(oneLineTrans As String, periode As Date)
         MyBase.New(oneLineTrans, periode)

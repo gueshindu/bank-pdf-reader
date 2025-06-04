@@ -1,4 +1,5 @@
 ﻿Public Class GueBankPDFReader
+    Dim bankInfo As BankInfo
     Public Sub New()
 
         ' This call is required by the designer.
@@ -58,20 +59,20 @@
 
         Me.Cursor = Cursors.WaitCursor
 
-        Dim parser = New GuePdfParser(lblFileName.Text)
+        Dim parser = New GuePdfParser(lblFileName.Text, numHalaman.Value)
 
-        'parser.SetBank(New BankBCA())
         parser.SetBankAuto()
-        parser.ReadBankDocument()
+        If parser.ReadBankDocument() Then
+            listBankTrans?.Clear()
+            stringToClipBoard = ""
 
-        listBankTrans?.Clear()
-        stringToClipBoard = ""
+            bankInfo = parser.GetBank.GetBankInfo
+            listBankTrans = parser.GetBank().GetListTransaksi
 
-        listBankTrans = parser.GetBank().GetListTransaksi
+            IsiGrid()
 
-        IsiGrid()
-
-        lblInfoBank.Text = parser.GetBank().GetBankInfo().ToString
+            lblInfoBank.Text = parser.GetBank().GetBankInfo().ToString
+        End If
         ProcessDone()
         Me.Cursor = Cursors.Default
     End Sub
@@ -79,6 +80,16 @@
     Private Sub IsiGrid()
         lstData.Items.Clear()
         stringToClipBoard = ""
+
+        Dim db As Double = 0
+        Dim cr As Double = 0
+        Dim begbal As Double = 0
+
+        If listBankTrans Is Nothing Then
+            MsgBox("No data", MsgBoxStyle.Exclamation, "Error")
+            Return
+        End If
+
         For i As Integer = 0 To listBankTrans.Count - 1
 
             If (stringToClipBoard = "") Then
@@ -87,6 +98,15 @@
                     showKeterangan:=chkKet.Checked,
                     showTipe:=chkTipe.Checked
                 ) & vbCrLf
+            End If
+
+            If (listBankTrans(i).TransType = "SALDO AWAL") Then
+                begbal = listBankTrans(i).Mutasi
+            ElseIf (listBankTrans(i).DBCR = "DB") Then
+                db += listBankTrans(i).Mutasi
+
+            Else
+                cr += listBankTrans(i).Mutasi
             End If
 
             lstData.Items.Add(
@@ -106,6 +126,14 @@
                 showTipe:=chkTipe.Checked
             ) & vbCrLf
         Next
+
+        lblDBCR.Text = "Hasil cek:" + vbCrLf
+        lblDBCR.Text += "Saldo awal: " + begbal.ToString("#,##0.00")
+        lblDBCR.Text += vbCrLf + "Debit: " + db.ToString("#,##0.00")
+        lblDBCR.Text += vbCrLf + "Kredit: " + cr.ToString("#,##0.00")
+        lblDBCR.Text += vbCrLf + "Saldo: " + (begbal + cr - db).ToString("#,##0.00")
+        lblDBCR.Text += vbCrLf + "Selisih: " + (bankInfo.SaldoAkhir - (begbal + cr - db)).ToString("#,##0.00")
+
 
         lblStatus.Text = "Data sudah tercopy. Silahkan paste di file excel"
     End Sub

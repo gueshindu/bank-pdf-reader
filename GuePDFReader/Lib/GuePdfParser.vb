@@ -1,4 +1,5 @@
 ﻿Imports System.Runtime.CompilerServices
+Imports iText.Kernel.Exceptions
 Imports iText.Kernel.Pdf
 Imports iText.Kernel.Pdf.Canvas.Parser
 
@@ -11,8 +12,9 @@ Public Class GuePdfParser
     Protected bank As IGueBank
     Private strtPage As Integer = 1
 
-    Public Sub New(pdfFilePath As String)
+    Public Sub New(pdfFilePath As String, Optional pageStart As Integer = 1)
         Me.pdfFile = pdfFilePath
+        Me.strtPage = pageStart
         OpenPDFFile()
     End Sub
 
@@ -34,6 +36,9 @@ Public Class GuePdfParser
     ''' <param name="page">Page start from 1</param>
     ''' <returns></returns>
     Public Function GetPDFTextPerPage(page As Integer) As String
+        If textToParsePerPage Is Nothing Then
+            Return ""
+        End If
         Try
             Return textToParsePerPage(page - 1)
         Catch ex As Exception
@@ -43,25 +48,30 @@ Public Class GuePdfParser
 
     Public Function OpenPDFFile() As Boolean
         If IO.File.Exists(pdfFile) Then
+            Dim idx As Integer = 0
             Dim pdfRead As PdfReader
+            Dim pdfDoc As PdfDocument
+
             pdfRead = New PdfReader(pdfFile)
+            Try
+                pdfDoc = New PdfDocument(pdfRead)
 
-
-
-            Dim pdfDoc = New PdfDocument(pdfRead)
+            Catch ex As BadPasswordException
+                MsgBox("PDF encripted. cannot open!", MsgBoxStyle.Exclamation, "PDF with password")
+                Return False
+            End Try
 
             Dim numPage = pdfDoc.GetNumberOfPages()
             textToParsePerPage = New List(Of String)
             textToParse = ""
-            For i As Integer = 1 To numPage
+            For i As Integer = StartPage To numPage
                 If (i >= strtPage) Then
                     textToParsePerPage.Add(PdfTextExtractor.GetTextFromPage(pdfDoc.GetPage(i)))
                 Else
                     textToParsePerPage.Add("")
                 End If
-                textToParse &= textToParsePerPage(i - 1) & vbCrLf
-                'Debug
-                'Console.WriteLine(textToParse)
+                textToParse &= textToParsePerPage(idx) & vbCrLf
+                idx += 1
             Next
             Return textToParse.Length > 10
         Else
@@ -77,18 +87,24 @@ Public Class GuePdfParser
         ElseIf strTmp.Contains("www.bankbsi.co.id") Then
             tmpBank = New BankBSI()
         Else
-            tmpBank = New BankBCA()
+            tmpBank = Nothing
         End If
         SetBank(tmpBank)
 
     End Sub
     Public Sub SetBank(bank As IGueBank)
-        Me.bank = bank
-        Me.bank.SetTextToParse(textToParse)
+        If (bank IsNot Nothing) Then
+            Me.bank = bank
+            Me.bank.SetTextToParse(textToParse)
+        End If
+
     End Sub
 
     Public Function ReadBankDocument() As Boolean
-        Return bank.ExecuteParse()
+        If bank IsNot Nothing Then
+            Return bank.ExecuteParse()
+        End If
+        Return False
     End Function
 
     Public Function GetBank() As IGueBank

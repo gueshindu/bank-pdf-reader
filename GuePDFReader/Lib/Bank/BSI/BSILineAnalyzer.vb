@@ -13,41 +13,32 @@ Public Class BSILineAnalyzer
     Public Function AnalyzeLine(lineIndex As Integer) As BSITrans
 
         Dim line = lines(lineIndex)
-        If line.Length < 10 Then
-            Return Nothing
+        Dim lineSplit = line.Split(CType(" ", Char()), StringSplitOptions.RemoveEmptyEntries)
+        Dim transType = ""
+        If lineSplit.Length > 3 Then
+            transType = lineSplit(3)
         End If
 
-        Dim transType = line.Substring(6)
 
-        Console.WriteLine(lineIndex & ". " & line)
-
-        'If transType.StartsWith(BCASaldoAwal.TRANS_TYPE) Then 'SALDO AWAL
-        '    Return New BCASaldoAwal(line, periode)
-        'ElseIf transType.StartsWith(BCABiayaAdmin.TRANS_TYPE) Then 'BY ADMIN
-        '    Return New BCABiayaAdmin(line, periode)
-        'ElseIf transType.StartsWith(BCATarikanATM.TRANS_TYPE) Then 'TARIKAN ATM
-        '    Return New BCATarikanATM(line, periode)
-        'ElseIf transType.StartsWith(BCASetoranTunai.TRANS_TYPE) Then 'SERTORAN TUNAI
-        '    Return New BCASetoranTunai(line, periode)
-        'ElseIf transType.StartsWith(BCABunga.TRANS_TYPE) Then 'BUNGA
-        '    Return New BCABunga(line, periode)
-        'ElseIf transType.StartsWith(BCAKoreksiBunga.TRANS_TYPE) Then 'KOREKSI BUNGA
-        '    Return New BCAKoreksiBunga(line, periode)
-        'ElseIf transType.StartsWith(BCAPajakBunga.TRANS_TYPE) Then 'PAJAK BUNGA
-        '    Return New BCAPajakBunga(line, periode)
-        'ElseIf transType.StartsWith(BCATransferEbanking.TRANS_TYPE) Then 'TRF E BANKING
-        '    Return RunMultiLineTrans(New BCATransferEbanking(line, periode), lineIndex)
-        'ElseIf transType.StartsWith(BCABIFast.TRANS_TYPE) Then 'TRF BI FAST
-        '    Return RunMultiLineTrans(New BCABIFast(line, periode), lineIndex)
-        'ElseIf transType.StartsWith(BCAKROtomatis.TRANS_TYPE) Then 'KR OTOMATIS
-        '    Return RunMultiLineTrans(New BCAKROtomatis(line, periode), lineIndex)
-        'ElseIf transType.StartsWith(BCASwitching.TRANS_TYPE) Then 'SWITCHING
-        '    Return RunMultiLineTrans(New BCASwitching(line, periode), lineIndex)
-        'End If
+        If line.Contains(BSIByAdmin.TRANS_TYPE) Then 'Biaya admin
+            Return New BSIByAdmin(line, periode)
+        ElseIf line.Contains(BSIAngsuran.TRANS_TYPE) Then 'Bayar angsuran
+            Return New BSIAngsuran(line, periode)
+        ElseIf line.Contains(BSIPajak.TRANS_TYPE) Then 'Pajak
+            Return New BSIPajak(line, periode)
+        ElseIf line.Contains(BSIBagiHasil.TRANS_TYPE) Then 'Bagi hasil
+            Return New BSIBagiHasil(line, periode)
+        ElseIf line.Contains(BSIByPindahBukuEbanking.TRANS_TYPE) Then 'Biaya pindah buku ebanking
+            Return RunMultiLineTrans(New BSIByPindahBukuEbanking(line, periode), lineIndex)
+        ElseIf line.Contains(BSIBayarEbanking.TRANS_TYPE) Then 'Pembaran ebanking
+            Return RunMultiLineTrans(New BSIBayarEbanking(line, periode), lineIndex)
+        ElseIf transType = BSIPindahBuku.TRANS_TYPE Then 'Pemindahbukuan
+            Return RunMultiLineTrans(New BSIPindahBuku(line, periode), lineIndex)
+        End If
         Return Nothing
     End Function
 
-    Private Function RunMultiLineTrans(trans As BCATrans, lineIndex As Integer) As BCATrans
+    Private Function RunMultiLineTrans(trans As BSITrans, lineIndex As Integer) As BSITrans
         If trans Is Nothing Then
             Return trans
         End If

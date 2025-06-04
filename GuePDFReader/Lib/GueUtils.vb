@@ -45,7 +45,22 @@ Public Class GueUtils
             format = CultureInfo.CreateSpecificCulture("id-ID")
         End If
 
-        Return Double.Parse(strDouble, format)
+        Dim result As Double
+        Double.TryParse(strDouble, NumberStyles.Any, format, result)
+
+        Return result
+    End Function
+
+    Public Shared Function IsNumeric(text As String, Optional usingENUSFormat As Boolean = True) As Boolean
+        Dim format As IFormatProvider
+        If usingENUSFormat Then
+            format = CultureInfo.CreateSpecificCulture("en-US")
+        Else
+            format = CultureInfo.CreateSpecificCulture("id-ID")
+        End If
+
+        Dim test As Double
+        Return Double.TryParse(text, NumberStyles.Any, format, test)
     End Function
 
     Public Shared Function IsRupiah(line As String) As Boolean
