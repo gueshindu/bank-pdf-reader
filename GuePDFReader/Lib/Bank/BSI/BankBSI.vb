@@ -105,21 +105,29 @@ Public Class BankBSI
                 i += 1 'Loncati header
             ElseIf linesPDFText(i).Contains("--- AKHIR LAPORAN ---") Then
                 'Footer
-                Dim line = linesPDFText(i - 3)
-                Dim lineSplit = line.Split(CType(" ", Char()), StringSplitOptions.RemoveEmptyEntries)
-                bankInfo.SaldoAkhir = GueUtils.ParseDouble(lineSplit.Last)
-                '
-                line = linesPDFText(i - 4)
-                lineSplit = line.Split(CType(" ", Char()), StringSplitOptions.RemoveEmptyEntries)
-                bankInfo.DB = GueUtils.ParseDouble(lineSplit.Last)
-                '
-                line = linesPDFText(i - 5)
-                lineSplit = line.Split(CType(" ", Char()), StringSplitOptions.RemoveEmptyEntries)
-                bankInfo.CR = GueUtils.ParseDouble(lineSplit.Last)
-                '
-                line = linesPDFText(i - 6)
-                lineSplit = line.Split(CType(" ", Char()), StringSplitOptions.RemoveEmptyEntries)
-                bankInfo.SaldoAwal = GueUtils.ParseDouble(lineSplit.Last)
+                Dim x = i
+                Dim line As String
+                Dim lineSplit As String()
+                While (x > 0)
+                    x -= 1
+                    line = linesPDFText(x)
+                    If (line Like "Saldo Akhir*") Then
+                        lineSplit = line.Split(CType(" ", Char()), StringSplitOptions.RemoveEmptyEntries)
+                        bankInfo.SaldoAkhir = GueUtils.ParseDouble(lineSplit.Last)
+                    ElseIf (line Like "Mutasi Debit*") Then
+                        lineSplit = line.Split(CType(" ", Char()), StringSplitOptions.RemoveEmptyEntries)
+                        bankInfo.DB = GueUtils.ParseDouble(lineSplit.Last)
+                    ElseIf (line Like "Mutasi Kredit*") Then
+                        lineSplit = line.Split(CType(" ", Char()), StringSplitOptions.RemoveEmptyEntries)
+                        bankInfo.CR = GueUtils.ParseDouble(lineSplit.Last)
+                    ElseIf (line Like "Saldo Awal*") Then
+                        lineSplit = line.Split(CType(" ", Char()), StringSplitOptions.RemoveEmptyEntries)
+                        bankInfo.SaldoAwal = GueUtils.ParseDouble(lineSplit.Last)
+                        x = 0
+                    End If
+
+                End While
+
                 Return True
 
             Else

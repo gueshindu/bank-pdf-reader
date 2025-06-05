@@ -4,11 +4,9 @@
     Public Const TRANS_TYPE = "Bagi Hasil atau Bonus"
     Public Sub New(saldoAwal As String, periode As Date)
         MyBase.New(saldoAwal, periode)
-        BankTrans = New BankTrans With {
-            .TransDate = periode,
-            .TransType = TRANS_TYPE
-        }
-        BankTrans.Keterangan = BankTrans.TransType
+        bankTrans.TransType = TRANS_TYPE
+
+        bankTrans.Keterangan = BankTrans.TransType
         bankTrans.DBCR = "CR"
 
         Dim lineSplit = saldoAwal.Split(CType(" ", Char()), StringSplitOptions.RemoveEmptyEntries)

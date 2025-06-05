@@ -3,10 +3,8 @@
     Public Const TRANS_TYPE = "Pajak"
     Public Sub New(saldoAwal As String, periode As Date)
         MyBase.New(saldoAwal, periode)
-        bankTrans = New BankTrans With {
-            .TransDate = periode,
-            .TransType = TRANS_TYPE
-        }
+        bankTrans.TransType = TRANS_TYPE
+
         bankTrans.Keterangan = bankTrans.TransType
         bankTrans.DBCR = "DB"
 

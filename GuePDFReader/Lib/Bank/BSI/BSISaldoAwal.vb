@@ -4,8 +4,8 @@
     Public Sub New(saldoAwal As String, periode As Date)
         MyBase.New(saldoAwal, periode)
         bankTrans = New BankTrans With {
-            .TransDate = periode,
-            .TransType = TRANS_TYPE
+            .TransType = TRANS_TYPE,
+            .TransDate = periode
         }
         bankTrans.Keterangan = bankTrans.TransType
         bankTrans.DBCR = "CR"
